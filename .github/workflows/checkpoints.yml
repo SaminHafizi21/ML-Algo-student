@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "exercises_with_checks/**"
+      - ".github/workflows/checkpoints.yml"
   workflow_dispatch:
 
 jobs:
@@ -14,7 +15,7 @@ jobs:
       matrix:
         include:
           - week: week01
-            tests: test_week01_knn.py
+            tests: test_week01.py
           - week: week02
             tests: test_week02.py
           - week: week03
@@ -25,6 +26,10 @@ jobs:
             tests: test_week05.py
           - week: week06
             tests: test_week06.py
+          - week: week07
+            tests: test_week07.py
+
+    steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-python@v5
@@ -37,4 +42,6 @@ jobs:
           pip install -q pytest nbformat nbclient ipykernel scikit-learn pandas numpy matplotlib pillow seaborn xgboost statsmodels
 
       - name: Run checkpoint ${{ matrix.week }}
+        env:
+          MPLBACKEND: Agg
         run: pytest exercises_with_checks/checks/${{ matrix.tests }} -v --tb=short

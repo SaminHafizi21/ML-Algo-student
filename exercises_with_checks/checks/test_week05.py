@@ -2,9 +2,12 @@
 
 Elke test valideert exact één verplichte variabele uit het notebook:
 bestaat -> type -> drempelwaarde. Geen implementatiehints in de meldingen.
+
+Let op: de creditcard-oefening zit bewust NIET in de autocheck. De dataset is
+te groot voor GitHub en wordt via het schoolplatform verdeeld; de checks zouden
+anders afhangen van een bestand dat in CI niet aanwezig is.
 """
 import numpy as np
-import pytest
 
 
 def _get(week, name):
@@ -68,50 +71,6 @@ def test_churn_accuracy(week05):
     acc = _get(week05, "accuracy_churn")
     assert float(acc) >= 0.75, (
         f"accuracy_churn={float(acc):.4f} is te laag (verwacht >= 0.75)"
-    )
-
-
-# ---------------- Creditcard ----------------
-
-def test_creditcard_ada_y_pred(week05):
-    y_pred = _get(week05, "y_pred_creditcard_ada")
-    assert len(np.asarray(y_pred)) == 56962, (
-        f"y_pred_creditcard_ada heeft {len(np.asarray(y_pred))} voorspellingen, verwacht 56962"
-    )
-
-
-def test_creditcard_ada_accuracy(week05):
-    acc = _get(week05, "accuracy_creditcard_ada")
-    assert float(acc) >= 0.998, (
-        f"accuracy_creditcard_ada={float(acc):.4f} is te laag (verwacht >= 0.998)"
-    )
-
-
-def test_creditcard_ada_detecteert_fraude(week05):
-    y_pred = np.asarray(_get(week05, "y_pred_creditcard_ada"))
-    assert int(np.sum(np.asarray(y_pred) == 1)) > 0, (
-        "y_pred_creditcard_ada bevat geen enkele fraudedetectie (alle 0)"
-    )
-
-
-def test_creditcard_xgb_y_pred(week05):
-    y_pred = _get(week05, "y_pred_creditcard_xgb")
-    assert len(np.asarray(y_pred)) == 56962, (
-        f"y_pred_creditcard_xgb heeft {len(np.asarray(y_pred))} voorspellingen, verwacht 56962"
-    )
-
-
-def test_creditcard_xgb_accuracy(week05):
-    acc = _get(week05, "accuracy_creditcard_xgb")
-    assert float(acc) >= 0.999, (
-        f"accuracy_creditcard_xgb={float(acc):.4f} is te laag (verwacht >= 0.999)"
-    )
-
-
-def test_creditcard_xgb_detecteert_fraude(week05):
-    y_pred = np.asarray(_get(week05, "y_pred_creditcard_xgb"))
-    assert int(np.sum(y_pred == 1)) > 0, (
-        "y_pred_creditcard_xgb bevat geen enkele fraudedetectie (alle 0)"
     )
 
 

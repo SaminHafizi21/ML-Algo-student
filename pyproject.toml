@@ -11,6 +11,10 @@ dependencies = [
     # ML basics
     "scikit-learn>=1.6,<2.0",
     "xgboost>=2.0,<3.0",
+    # Advanced clustering (week 6, DBSCAN)
+    "hdbscan>=0.8.34",
+    # Image processing (week 6, clustering op beelden)
+    "opencv-python>=4.8",
     # Time series (ARIMA)
     "statsmodels>=0.14",
     # Visualization

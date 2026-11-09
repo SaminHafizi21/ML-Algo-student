@@ -18,7 +18,26 @@ svm_clf = SVC(kernel="linear", C=0.25)
 svm_clf.fit(X, y)
 ```
 
-- De decision boundary + marges kan je plotten via `svm_clf.coef_[0]`, `svm_clf.intercept_[0]` en `svm_clf.support_vectors_` (code ter illustratie, niet te kennen).
+```python
+def plot_svc_decision_boundary(svm_clf, xmin, xmax):
+    w = svm_clf.coef_[0]
+    b = svm_clf.intercept_[0]
+    # Op het beslissingsvlak: w0*x0 + w1*x1 + b = 0
+    # => x1 = -w0/w1 * x0 - b/w1
+    x0 = np.linspace(xmin, xmax, 200)
+    decision_boundary = -w[0] / w[1] * x0 - b / w[1]
+    margin = 1/w[1]
+    gutter_up = decision_boundary + margin
+    gutter_down = decision_boundary - margin
+    svs = svm_clf.support_vectors_
+    plt.plot(x0, decision_boundary, "k-", linewidth=2, zorder=-2)
+    plt.plot(x0, gutter_up, "k--", linewidth=2, zorder=-2)
+    plt.plot(x0, gutter_down, "k--", linewidth=2, zorder=-2)
+    plt.scatter(svs[:, 0], svs[:, 1], s=180, facecolors='#AAA', zorder=-1)
+```
+
+- De marge wordt bepaald door enkel de punten **op de rand** — de **support vectors**.
+> Code ter **illustratie**, niet te kennen — mag je altijd gebruiken indien nodig.
 
 ## Soft-margin classification
 
@@ -33,10 +52,23 @@ svm_clf.fit(X, y)
   1. Lineair SVM: geen goede fit.
   2. Lineair SVM + polynomiale features (tot 3e graad) toegevoegd als kolommen: beter.
   3. SVM met similariteitsfuncties (punten die "op mekaar lijken"): beter.
-- **Doel van de kernel**: zorgen dat de dataset in een hogere dimensie wél separabel is. Eens gekozen, werkt de classifier alsof hij lineair is in die hogere dimensie.
-- **Kernel trick**: efficiënter omdat de kernel (een non-lineaire operator) niet uitgerekend wordt, enkel de inproducten tussen de features — dankzij geavanceerde wiskunde.
+- **Doel van de kernel**: zorgen dat de dataset in een hogere dimensie wél separabel is. Concreet voor de moons-dataset: je wil minstens **één extra dimensie** zodat er nu wél een **lineaire scheiding** (een vlak) gemaakt kan worden. Eens de kernel gekozen, doet de classifier zelf al het andere werk: hij werkt dan alsof hij een lineaire classifier in hogere dimensie is.
+- **Similariteitsfuncties**: we kijken naar punten die 'dicht bij mekaar liggen' (bv. de Gaussische RBF).
+- **Kernel trick**: efficiënter omdat de kernel (een non-lineaire operator) niet uitgerekend wordt, maar enkel de **inproducten** tussen die features — dankzij geavanceerde wiskunde kan dit efficiënt gebeuren.
 
-- Gebruik SVM voor niet-lineaire datasets (in de praktijk is bijna niets "vanzelf" lineair) en niet-al-te-grote datasets; ze zijn onderhevig aan scaling, dus gebruik zeker een **StandardScaler**.
+### Wanneer SVM gebruiken?
+
+- **Niet-lineaire datasets** — in de praktijk is bijna niets "vanzelf" lineair.
+- **Niet al te grote datasets**.
+- Ze zijn onderhevig aan **scaling** — gebruik zeker een `StandardScaler`:
+
+```python
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
+
+svm_clf = make_pipeline(StandardScaler(), SVC(kernel="rbf", C=1))
+```
 
 ## Evaluatie van modellen
 
