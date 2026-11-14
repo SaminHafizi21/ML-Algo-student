@@ -18,6 +18,7 @@ svm_clf = SVC(kernel="linear", C=0.25)
 svm_clf.fit(X, y)
 ```
 
+<<<<<<< Updated upstream
 ```python
 def plot_svc_decision_boundary(svm_clf, xmin, xmax):
     w = svm_clf.coef_[0]
@@ -38,6 +39,9 @@ def plot_svc_decision_boundary(svm_clf, xmin, xmax):
 
 - De marge wordt bepaald door enkel de punten **op de rand** — de **support vectors**.
 > Code ter **illustratie**, niet te kennen — mag je altijd gebruiken indien nodig.
+=======
+- De decision boundary + marges kan je plotten via `svm_clf.coef_[0]`, `svm_clf.intercept_[0]` en `svm_clf.support_vectors_` (code ter illustratie, niet te kennen).
+>>>>>>> Stashed changes
 
 ## Soft-margin classification
 
@@ -52,6 +56,7 @@ def plot_svc_decision_boundary(svm_clf, xmin, xmax):
   1. Lineair SVM: geen goede fit.
   2. Lineair SVM + polynomiale features (tot 3e graad) toegevoegd als kolommen: beter.
   3. SVM met similariteitsfuncties (punten die "op mekaar lijken"): beter.
+<<<<<<< Updated upstream
 - **Doel van de kernel**: zorgen dat de dataset in een hogere dimensie wél separabel is. Concreet voor de moons-dataset: je wil minstens **één extra dimensie** zodat er nu wél een **lineaire scheiding** (een vlak) gemaakt kan worden. Eens de kernel gekozen, doet de classifier zelf al het andere werk: hij werkt dan alsof hij een lineaire classifier in hogere dimensie is.
 - **Similariteitsfuncties**: we kijken naar punten die 'dicht bij mekaar liggen' (bv. de Gaussische RBF).
 - **Kernel trick**: efficiënter omdat de kernel (een non-lineaire operator) niet uitgerekend wordt, maar enkel de **inproducten** tussen die features — dankzij geavanceerde wiskunde kan dit efficiënt gebeuren.
@@ -69,6 +74,12 @@ from sklearn.svm import SVC
 
 svm_clf = make_pipeline(StandardScaler(), SVC(kernel="rbf", C=1))
 ```
+=======
+- **Doel van de kernel**: zorgen dat de dataset in een hogere dimensie wél separabel is. Eens gekozen, werkt de classifier alsof hij lineair is in die hogere dimensie.
+- **Kernel trick**: efficiënter omdat de kernel (een non-lineaire operator) niet uitgerekend wordt, enkel de inproducten tussen de features — dankzij geavanceerde wiskunde.
+
+- Gebruik SVM voor niet-lineaire datasets (in de praktijk is bijna niets "vanzelf" lineair) en niet-al-te-grote datasets; ze zijn onderhevig aan scaling, dus gebruik zeker een **StandardScaler**.
+>>>>>>> Stashed changes
 
 ## Evaluatie van modellen
 

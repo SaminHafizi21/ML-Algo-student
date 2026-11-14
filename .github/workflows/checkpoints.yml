@@ -15,6 +15,7 @@ jobs:
       matrix:
         include:
           - week: week01
+<<<<<<< Updated upstream
             tests: test_week01.py
           - week: week02
             tests: test_week02.py
@@ -29,6 +30,11 @@ jobs:
           - week: week07
             tests: test_week07.py
 
+=======
+            tests: test_week01_knn.py
+          - week: week02
+            tests: test_week02.py
+>>>>>>> Stashed changes
     steps:
       - uses: actions/checkout@v4
 
@@ -42,6 +48,9 @@ jobs:
           pip install -q pytest nbformat nbclient ipykernel scikit-learn pandas numpy matplotlib pillow seaborn xgboost statsmodels
 
       - name: Run checkpoint ${{ matrix.week }}
+<<<<<<< Updated upstream
         env:
           MPLBACKEND: Agg
+=======
+>>>>>>> Stashed changes
         run: pytest exercises_with_checks/checks/${{ matrix.tests }} -v --tb=short

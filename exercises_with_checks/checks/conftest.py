@@ -5,6 +5,7 @@ import pytest
 from nbclient import NotebookClient
 from pathlib import Path
 
+<<<<<<< Updated upstream
 _NOTEBOOKS = {
     "week01": ("week01", "knn_checkpoint_opgave.ipynb", "knn_checkpoint_oplossing.ipynb"),
     "week02": ("week02", "svm_checkpoint_opgave.ipynb", "svm_checkpoint_oplossing.ipynb"),
@@ -17,6 +18,11 @@ _NOTEBOOKS = {
                "kmeans_dbscan_checkpoint_oplossing.ipynb"),
     "week07": ("week07", "dim_reductie_checkpoint_opgave.ipynb",
                "dim_reductie_checkpoint_oplossing.ipynb"),
+=======
+NOTEBOOKS = {
+    "week01": Path(__file__).resolve().parents[1] / "week01" / "knn_checkpoint_opgave.ipynb",
+    "week02": Path(__file__).resolve().parents[1] / "week02" / "svm_checkpoint_opgave.ipynb",
+>>>>>>> Stashed changes
 }
 
 
@@ -66,6 +72,7 @@ def week01():
 @pytest.fixture(scope="session")
 def week02():
     return _notebook_namespace("week02")
+<<<<<<< Updated upstream
 
 
 @pytest.fixture(scope="session")
@@ -91,3 +98,5 @@ def week06():
 @pytest.fixture(scope="session")
 def week07():
     return _notebook_namespace("week07")
+=======
+>>>>>>> Stashed changes

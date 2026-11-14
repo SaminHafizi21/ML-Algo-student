@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 [project]
 name = "ml_algorithms"
 version = "0.1.0"
@@ -26,4 +27,34 @@ dependencies = [
     # Utilities
     "tqdm>=4.66,<4.68",
     "requests>=2.31,<2.33",
+=======
+[project]
+name = "ml_algorithms"
+version = "0.1.0"
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    # Core
+    "numpy>=1.24,<2.0",
+    "pandas>=2.2,<3.0",
+    "scipy>=1.14,<2.0",
+    # ML basics
+    "scikit-learn>=1.5,<2.0",
+    "xgboost>=1.7,<2.0",
+    # Visualization
+    "matplotlib>=3.7,<3.9",
+    "seaborn>=0.12,<0.14",
+    # Notebook support
+    "ipykernel>=6.25,<7.0",
+    "ipython>=8.10,<9.0",
+    # Utilities
+    "tqdm>=4.66,<4.68",
+    "requests>=2.31,<2.33",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=7,<9",
+    "nbformat>=5,<6",
+    "nbclient>=0.9,<0.11",
+>>>>>>> Stashed changes
 ]
