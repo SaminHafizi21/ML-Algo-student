@@ -17,6 +17,8 @@ _NOTEBOOKS = {
                "kmeans_dbscan_checkpoint_oplossing.ipynb"),
     "week07": ("week07", "dim_reductie_checkpoint_opgave.ipynb",
                "dim_reductie_checkpoint_oplossing.ipynb"),
+    "week08": ("week08", "recommender_systems_checkpoint_opgave.ipynb",
+               "recommender_systems_checkpoint_oplossing.ipynb"),
 }
 
 
@@ -91,3 +93,8 @@ def week06():
 @pytest.fixture(scope="session")
 def week07():
     return _notebook_namespace("week07")
+
+
+@pytest.fixture(scope="session")
+def week08():
+    return _notebook_namespace("week08")
