@@ -28,20 +28,23 @@ jobs:
             tests: test_week06.py
           - week: week07
             tests: test_week07.py
+          - week: week08
+            tests: test_week08.py
 
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - uses: astral-sh/setup-uv@v5
         with:
           python-version: "3.12"
 
-      - name: Installeer dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -q pytest nbformat nbclient ipykernel scikit-learn pandas numpy matplotlib pillow seaborn xgboost statsmodels
+      - name: Installeer systeemafhankelijkheid (OpenMP voor implicit)
+        run: sudo apt-get update && sudo apt-get install -y libgomp1
+
+      - name: Installeer dependencies (uv sync uit pyproject.toml)
+        run: uv sync
 
       - name: Run checkpoint ${{ matrix.week }}
         env:
           MPLBACKEND: Agg
-        run: pytest exercises_with_checks/checks/${{ matrix.tests }} -v --tb=short
+        run: uv run pytest exercises_with_checks/checks/${{ matrix.tests }} -v --tb=short
