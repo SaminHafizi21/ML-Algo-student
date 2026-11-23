@@ -12,7 +12,7 @@
   ],
   "updateContentCommand": "uv sync",
   // git is installed, the git config files reed the right permissions to work with ssh keys
-  "postCreateCommand": "apt-get update && apt-get install -y git && chmod 600 /root/.ssh/config /root/.ssh/id_* && chmod 644 /root/.ssh/*.pub /root/.ssh/known_hosts*",
+  // "postCreateCommand": "apt-get update && apt-get install -y git && chmod 600 /root/.ssh/config /root/.ssh/id_* && chmod 644 /root/.ssh/*.pub /root/.ssh/known_hosts*",
   "customizations": {
     "vscode": {
       "extensions": [
