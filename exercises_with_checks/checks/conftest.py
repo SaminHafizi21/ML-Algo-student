@@ -19,6 +19,8 @@ _NOTEBOOKS = {
                "dim_reductie_checkpoint_oplossing.ipynb"),
     "week08": ("week08", "recommender_systems_checkpoint_opgave.ipynb",
                "recommender_systems_checkpoint_oplossing.ipynb"),
+    "week09": ("week09", "anomaly_drift_checkpoint_opgave.ipynb",
+               "anomaly_drift_checkpoint_oplossing.ipynb"),
 }
 
 
@@ -98,3 +100,8 @@ def week07():
 @pytest.fixture(scope="session")
 def week08():
     return _notebook_namespace("week08")
+
+
+@pytest.fixture(scope="session")
+def week09():
+    return _notebook_namespace("week09")
