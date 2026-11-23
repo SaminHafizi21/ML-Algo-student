@@ -15,6 +15,7 @@ dependencies = [
     "hdbscan>=0.8.34",
     # Image processing (week 6, clustering op beelden)
     "opencv-python>=4.8",
+    "pillow>=10.0",
     # Time series (ARIMA)
     "statsmodels>=0.14",
     # Visualization
@@ -23,7 +24,19 @@ dependencies = [
     # Notebook support
     "ipykernel>=6.25,<7.0",
     "ipython>=8.10,<9.0",
+    # Recommender systems (week 8, ALS / implicit feedback)
+    "implicit>=0.7",
+    "h5py>=3.8",
+
     # Utilities
     "tqdm>=4.66,<4.68",
     "requests>=2.31,<2.33",
+]
+
+[dependency-groups]
+dev = [
+    # Tooling voor de automatische checkpoint-checks (pytest + notebook-uitvoering)
+    "pytest>=8.0",
+    "nbformat>=5.9",
+    "nbclient>=0.10",
 ]
